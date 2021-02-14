@@ -43,7 +43,9 @@ namespace API
                                 builder =>
                                 {
                                     builder.WithOrigins("http://localhost:3000",
-                                                        "http://172.17.131.1:3000");
+                                                        "http://172.17.131.1:3000")
+                                            .AllowAnyHeader()
+                                            .AllowAnyMethod();
                                 });
             });
 
