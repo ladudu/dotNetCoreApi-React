@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { createContext, useContext } from 'react';
+import { observer } from 'mobx-react-lite';
 import { Button, Container, Menu } from 'semantic-ui-react';
-
-interface IProps {
-  openCreateFrom: () => void;
-}
-function NavBar({ openCreateFrom }: IProps) {
+import ActivityStore from '../../app/stores/activityStore';
+function NavBar() {
+  const activityStore = useContext(ActivityStore);
+  const { openCreateFrom } = activityStore;
   return (
     <Menu fixed="top" inverted>
       <Container>
@@ -21,4 +21,4 @@ function NavBar({ openCreateFrom }: IProps) {
   );
 }
 
-export default NavBar;
+export default observer(NavBar);

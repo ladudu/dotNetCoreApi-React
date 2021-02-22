@@ -1,22 +1,15 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useContext } from 'react';
 import { Form, Segment, Button } from 'semantic-ui-react';
 import { IActivity } from '../../../app/models/activity';
 import { v4 as uuid } from 'uuid';
-
+import ActivityStore from '../../../app/stores/activityStore';
+import { observer } from 'mobx-react-lite';
 interface IProps {
-  setEditMode: (editMode: boolean) => void;
   activity: IActivity;
-  createActivity: (activity: IActivity) => void;
-  editActivity: (activity: IActivity) => void;
-  submitting: boolean;
 }
-function ActivitiesFrom({
-  setEditMode,
-  activity: initializeFromState,
-  createActivity,
-  editActivity,
-  submitting,
-}: IProps) {
+function ActivitiesForm({ activity: initializeFromState }: IProps) {
+  const activityStore = useContext(ActivityStore);
+  const { createActivity, editActivity, submitting, cancelFormOpen } = activityStore;
   const initializeFrom = () => {
     if (initializeFromState) {
       return initializeFromState;
@@ -73,10 +66,10 @@ function ActivitiesFrom({
         <Form.Input onChange={handleInputChange} name="city" placeholder="City" value={activity.city} />
         <Form.Input onChange={handleInputChange} name="venue" placeholder="Venue" value={activity.venue} />
         <Button loading={submitting} floated="right" positive type="submit" content="Submit" />
-        <Button onClick={() => setEditMode(false)} floated="right" type="button" content="Cancel" />
+        <Button onClick={() => cancelFormOpen()} floated="right" type="button" content="Cancel" />
       </Form>
     </Segment>
   );
 }
 
-export default ActivitiesFrom;
+export default observer(ActivitiesForm);
