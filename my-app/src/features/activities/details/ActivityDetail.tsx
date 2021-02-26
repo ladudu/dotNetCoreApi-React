@@ -19,7 +19,8 @@ function ActivityDetail({ match }: RouteComponentProps<DetailParams>) {
     loadActivity(match.params.id);
   }, [loadActivity]);
 
-  if (loadingInitial || !activity) return <LoadingComponent content="loading activity..." />;
+  if (loadingInitial) return <LoadingComponent content="loading activity..." />;
+  if (!activity) return <h1>Activity not found</h1>;
   return (
     <Grid>
       <GridColumn width={10}>

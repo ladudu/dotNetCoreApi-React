@@ -34,6 +34,9 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<Unit>> Create(Create.Command command)
         {
+            // if(!ModelState.IsValid){
+            //     return BadRequest(ModelState);
+            // }
             return await _mediator.Send(command);
         }
 
@@ -47,7 +50,7 @@ namespace API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Unit>> Delete(Guid id)
         {
-            return await _mediator.Send(new Delete.Command{Id = id});
+            return await _mediator.Send(new Delete.Command { Id = id });
         }
     }
 }

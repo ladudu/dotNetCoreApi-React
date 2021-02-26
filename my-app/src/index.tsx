@@ -4,14 +4,17 @@ import './app/layout/styles.css';
 import App from './app/layout/App';
 import reportWebVitals from './reportWebVitals';
 import 'semantic-ui-css/semantic.min.css';
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import ScrollToTop from './app/layout/ScrollToTop';
+import { createBrowserHistory } from 'history';
+import 'react-toastify/dist/ReactToastify.min.css';
+export const history = createBrowserHistory();
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <Router history={history}>
       <ScrollToTop />
       <App />
-    </BrowserRouter>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
